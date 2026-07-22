@@ -14,9 +14,12 @@ jobs:
 
     strategy:
       matrix:
-        solution:
-          - PullRequest.slnx
-          - PullRequest_VS2019.sln
+        include:
+          - solution: PullRequest.slnx
+            manifest: PullRequest/source.extension.vsixmanifest
+
+          - solution: PullRequest_VS2019.sln
+            manifest: PullRequest_VS2019/source.extension.vsixmanifest
 
     steps:
       - name: Checkout
@@ -24,6 +27,15 @@ jobs:
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
+
+      - name: Update Version
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart("v")
+
+          [xml]$manifest = Get-Content "${{ matrix.manifest }}"
+          $manifest.PackageManifest.Metadata.Identity.Version = $version
+          $manifest.Save("${{ matrix.manifest }}")
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
