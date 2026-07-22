@@ -57,7 +57,7 @@
 				<Parent guid="guidPullRequestPackageCmdSet" id="MyMenuGroup" />
 				<Icon guid="guidImages" id="bmpPic1" />
 				<Strings>
-					<ButtonText>プルリクエストを作成</ButtonText>
+					<ButtonText>プルリクエストページを開く</ButtonText>
 				</Strings>
 			</Button>
 		</Buttons>

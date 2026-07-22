@@ -99,7 +99,7 @@ namespace PullRequest
 			string parentBranch = GetParentBranch(branch);
 
 			string normalizedRepository = NormalizeRemoteUrl(remote);
-			string url = $"{normalizedRepository}/compare/{parentBranch}...{branch}?expand=1";
+			string url = $"{normalizedRepository}/compare/{parentBranch}...{branch}?quick_pull=1";
 
 			var dte = (EnvDTE.DTE)Package.GetGlobalService(typeof(SDTE));
 
